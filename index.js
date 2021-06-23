@@ -16,7 +16,7 @@ client.connect(err => {
 });
 
 
-app.listen(process.env.API_PORT, console.log(`API online on http://localhost:${process.env.API_PORT}`))
+app.listen(process.env.API_PORT, console.log(`API online on port ${process.env.API_PORT}`))
 
 
 app.get(`/user`, async (req, res) => {
