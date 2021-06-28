@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongodb": "^3.6.9"
+    "mongodb": "^3.6.9",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "dotenv": "^10.0.0"
