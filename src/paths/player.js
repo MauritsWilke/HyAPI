@@ -1,19 +1,28 @@
 // ! Daily reward available in not showing the correct time
 // ! Add all the other stats 😭
 // ! Bedwars Dream Mode
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
 const fetch = require('node-fetch');
-const hy = require(`../utils/hypixel`)
+const hy = require(`../utils/hypixel`);
+const mc = require(`../utils/mojang`);
 
-const BASE_URL = "https://api.hypixel.net"
+const BASE_URL = "https://api.hypixel.net";
 
-router.use(express.json())
+router.use(express.json());
 
 router.get('/', async function (req, res) {
 	//try {
-	if (!req.query.uuid) throw new Error(`Missing field(s): UUID`);
-	const userQuery = typeof (req.query.uuid) == "object" ? req.query.uuid[0].toLowerCase() : req.query.uuid.toLowerCase();
+	if (!req.query.uuid && !req.query.name) throw new Error(`Missing field(s): [uuid] or [name]`);
+	let userQuery;
+	if (req.query.name && !req.query.uuid) {
+		const username = typeof (req.query.name) == "object" ? req.query.name[0].toLowerCase() : req.query.name.toLowerCase();
+		userQuery = await mc.getUUID(username)
+	} else {
+		userQuery = typeof (req.query.uuid) == "object" ? req.query.uuid[0].toLowerCase() : req.query.uuid.toLowerCase();
+	}
+	console.log(userQuery)
+
 
 	// _ Actually fetch user data
 	const response = await fetch(`${BASE_URL}/player?uuid=${userQuery}&key=${process.env.HYPIXEL_API_KEY}`);
@@ -33,6 +42,8 @@ router.get('/', async function (req, res) {
 			uuid: player.uuid,
 			displayName: player.displayname,
 			level: playerLevel,
+			chat: player.channel,
+			language: player.userLanguage,
 
 			// The Other Statistics
 			karma: player.karma,
@@ -67,8 +78,11 @@ router.get('/', async function (req, res) {
 			} : undefined,
 
 			// Rank
-			rank: playerRank,
-			plusColour: player.rankPlusColor,
+			rank: {
+				rank: playerRank,
+				plusColour: player.rankPlusColor,
+				rankColour: player.monthlyRankColor
+			},
 
 			// Login And last game
 			online: online,
@@ -79,6 +93,42 @@ router.get('/', async function (req, res) {
 
 			// Game Statistics
 			stats: {
+				arcade: player.stats?.Arcade ? {
+					coins: player.stats.Arcade.coins,
+					zombies: {
+
+					},
+					hideAndSeek: {
+
+					},
+					partyGames: {
+
+					},
+					enderSpleef: {
+
+					},
+					scubaSimulator: {
+
+					},
+					throwOut: {
+
+					},
+					football: {
+						wins: player.stats.Arcade.wins_soccer,
+						goals: player.stats.Arcade.goals_soccer,
+						kicks: player.stats.Arcade.kicks_soccer,
+						powerKicks: player.stats.Arcade.powerkicks_soccer
+					},
+					dragonWars: {
+
+					},
+					holeInTheWall: {
+
+					},
+					miniWalls: {
+
+					}
+				} : undefined,
 				bedwars: player.stats?.Bedwars ? {
 					star: player.achievements.bedwars_level,
 					lootboxes: player.stats.Bedwars.bedwars_boxes,

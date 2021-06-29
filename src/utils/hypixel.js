@@ -8,11 +8,6 @@ module.exports = {
 	getPlayerRank
 }
 
-const EASY_LEVELS = 4;
-const EASY_LEVELS_XP = 7000;
-const XP_PER_PRESTIGE = 96 * 5000 + EASY_LEVELS_XP;
-const LEVELS_PER_PRESTIGE = 100;
-
 function getPlayerRank(player) {
 	if (player?.rank) return player.rank;
 	if (player?.monthlyPackageRank) return "MVP++";
