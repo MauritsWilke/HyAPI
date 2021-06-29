@@ -34,8 +34,12 @@ This means words as `color` will be `colour` and `soccer` will be `football`
 
 <details>
 <summary>Dictionary</summary>
-<li>color : colour</li>
-<li>soccer : football</li>
+
+| American | British    |
+| :------- | :--------- |
+| `color`  | `colour`   |
+| `soccer` | `football` |
+
 </details>
 
 ## ℹ Project Information
