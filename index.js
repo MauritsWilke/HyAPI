@@ -4,12 +4,12 @@ const app = require('express')();
 const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // _ ROUTING                                                    
-const tracking = require(`./src/paths/tracking`)
+//const tracking = require(`./src/paths/tracking`)
 const player = require(`./src/paths/player`)
 const paths = require(`./src/paths/paths`)
 
 // _ LINKING____________________________________________________
-app.use(`/tracking`, tracking)
+//app.use(`/tracking`, tracking)
 app.use(`/player`, player)
 app.use(`/paths`, paths)
 
