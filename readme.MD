@@ -70,7 +70,7 @@ The base URL for all requests is
   https://hyapi.tech/
 ```
 
-#### Examples
+### Examples
 
 ```http
   GET /player
