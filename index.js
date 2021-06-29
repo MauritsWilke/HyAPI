@@ -24,7 +24,6 @@ client.connect(err => {
 app.listen(process.env.API_PORT, console.log(`API online on port ${process.env.API_PORT}`))
 app.use((req, res) => {
 	res.status(404).json({
-		success: false,
-		error: "path invalid"
+		error: "invalid path"
 	})
 })

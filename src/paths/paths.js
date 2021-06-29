@@ -15,7 +15,6 @@ const paths = {
 
 router.get('/', async function (req, res) {
 	res.status(200).send({
-		success: true,
 		paths: paths
 	})
 })

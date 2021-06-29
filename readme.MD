@@ -9,7 +9,7 @@ This API has several features that make it better than the Hypixel API 👇
 
 ### ⚡ **Faster**
 
-HyAPI is faster than the Hypixel API because we cache data and return a smaller amount of data allowing for responses upto 20 times as fast!
+HyAPI is faster than the Hypixel API because we cache data and return a smaller amount of data allowing for responses up to 20 times as fast!
 
 ### 📗 **Easier**
 
@@ -19,6 +19,7 @@ Examples of this are things like:
 <ul>
 	<li> Player Rank
 	<li> Network Level
+	<li> No <b>success</b> in the response allows you to use the response data without formatting
 	<li> 
 	<details>
 	<summary>Ratios</summary>

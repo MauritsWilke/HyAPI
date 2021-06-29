@@ -34,6 +34,7 @@ router.get('/', async function (req, res) {
 			const playerLevel = hy.calculatePlayerLevel(player.networkExp)
 			const online = await hy.getPlayerStatus(userQuery)
 
+			// _ Massive formatted data object
 			formattedPlayer = {
 				// General Info
 				uuid: player.uuid,
@@ -148,12 +149,10 @@ router.get('/', async function (req, res) {
 		}
 
 		res.status(200).send({
-			success: true,
-			player: formattedPlayer
+			...formattedPlayer
 		})
 	} catch (err) {
 		res.status(404).json({
-			success: false,
 			error: err.message
 		})
 	}
