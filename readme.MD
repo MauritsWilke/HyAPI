@@ -48,14 +48,11 @@ Examples of this are things like:
 
 The Hypixel API gives a lot of unnecessary data that the average request doesn't need and just clutters response data.
 
-<details>
-	<summary>Examples</summary>
-		<ul>
-			<li> levelingRewards
-			<li> The 20 different ways of killing and dying
-			<li> Overdetailed Quests data
-		</ul>
-</details> ​
+<ul>
+	<li> levelingRewards
+	<li> The 20 different ways of killing and dying
+	<li> Overdetailed Quests data
+</ul>
 
 ### **Specific requests**
 
