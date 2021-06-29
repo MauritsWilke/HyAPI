@@ -7,11 +7,11 @@ This API was made to make getting data from the Hypixel API easier and better.
 
 This API has several features that make it better than the Hypixel API 👇
 
-### **Faster**
+### ⚡ **Faster**
 
 HyAPI is faster than the Hypixel API because we cache data and return a smaller amount of data allowing for responses upto 20 times as fast!
 
-### **Easier**
+### 📗 **Easier**
 
 HyAPI is easier to use than the Hypixel API because we process the data for you. \
 Examples of this are things like:
@@ -44,7 +44,7 @@ Examples of this are things like:
 	</details>
 </ul>
 
-### **No unnecessary things**
+### 🗑 **No unnecessary things**
 
 The Hypixel API gives a lot of unnecessary data that the average request doesn't need and just clutters response data.
 
@@ -54,7 +54,7 @@ The Hypixel API gives a lot of unnecessary data that the average request doesn't
 	<li> Overdetailed Quests data
 </ul>
 
-### **Specific requests**
+### 🛒 **Specific requests**
 
 The HyAPI returns just the data you want by using different paths for specific requests. \
 This allows requests to be made more specific and deliver data faster!
@@ -67,7 +67,7 @@ The base URL for all requests is
   https://hyapi.tech/
 ```
 
-### Examples
+### 📖 Examples
 
 ```http
   GET /player
