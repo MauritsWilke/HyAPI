@@ -1,6 +1,6 @@
 // ! Daily reward available in not showing the correct time
-// !
-// !
+// ! Add all the other stats 😭
+// ! Bedwars Dream Mode
 var express = require('express')
 var router = express.Router()
 const fetch = require('node-fetch');
@@ -49,23 +49,22 @@ router.get('/', async function (req, res) {
 				twitch: player.socialMedia?.links?.TWITCH,
 				discord: player.socialMedia?.links?.DISCORD,
 				hypixel: player.socialMedia?.links?.HYPIXEL,
-			} : null?.null,
+			} : undefined,
 
 			// Daily Reward
 			dailyReward: player?.lastClaimedReward ? {
 				availableIn: new Date() - player.lastClaimedReward,
 				streak: player.rewardStreak,
 				highScore: player.rewardHighScore
-			} : null?.null,
+			} : undefined,
 
 			// Pet
 			pet: player.currentPet ? {
-				name: player.petStats[player.currentPet]?.name ? (player.petStats[player.currentPet]?.name).replace(/§./, "") : null?.null,
-				hunger: player.petStats[player.currentPet]?.hunger ? player.petStats[player.currentPet].HUNGER : null?.null,
-				exercise: player.petStats[player.currentPet]?.EXERCISE ? player.petStats[player.currentPet].EXERCISE : null?.null,
-				hunger: player.petStats[player.currentPet]?.THIRST ? player.petStats[player.currentPet].THIRST : null?.null,
-				type: player.currentPet
-			} : null?.null,
+				name: player.petStats[player.currentPet]?.name ?? undefined,
+				hunger: player.petStats[player.currentPet]?.HUNGER ?? undefined,
+				exercise: player.petStats[player.currentPet]?.EXERCISE ?? undefined,
+				type: player.currentPet ?? undefined
+			} : undefined,
 
 			// Rank
 			rank: playerRank,
@@ -180,7 +179,7 @@ router.get('/', async function (req, res) {
 					dream: {
 
 					}
-				} : null?.null,
+				} : undefined,
 
 			}
 		}
