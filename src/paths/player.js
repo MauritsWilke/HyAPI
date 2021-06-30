@@ -34,7 +34,7 @@ router.get('/', async function (req, res) {
 			const playerLevel = hy.calculatePlayerLevel(player.networkExp)
 			const online = await hy.getPlayerStatus(userQuery)
 
-			// _ Massive formatted data object
+			// _ Massive formatted data
 			formattedPlayer = {
 				// General Info
 				uuid: player.uuid,
@@ -58,7 +58,7 @@ router.get('/', async function (req, res) {
 
 				// Cosmetics
 				cosmetics: {
-					count: player.vanityMeta.packages.length ?? 0,
+					count: player.vanityMeta?.packages.length ?? 0,
 					gadget: player.currentGadget,
 					clickEffect: player.currentClickEffect,
 					cloak: player.currentCloak,
@@ -119,7 +119,7 @@ router.get('/', async function (req, res) {
 
 				// Daily Reward
 				dailyReward: player?.lastClaimedReward ? {
-					availableIn: 86400000 - (new Date() - (player.lastClaimedReward)),
+					availableIn: (86400000 - (new Date() - (player.lastClaimedReward))) < 0 ? 0 : 86400000 - (new Date() - (player.lastClaimedReward)),
 					streak: player.rewardStreak,
 					highScore: player.rewardHighScore
 				} : undefined,
