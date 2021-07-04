@@ -162,7 +162,7 @@ router.get('/', async function (req, res) {
 			if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
 				if (err) throw new Error(`Error inserting to database: ${err}`)
 			})
-			else cache.updateOne({ _id: cacheUser._id }, cleanedFormatted, (err, res) => {
+			else cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
 				if (err) throw new Error(`Error inserting to database: ${err}`)
 			})
 
