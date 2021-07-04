@@ -10,6 +10,7 @@ const mc = require(`../utils/mojang`);
 router.use(express.json());
 client.connect(err => {
 	if (err) {
+		console.log(err)
 		console.log("failed to connect to database, aborting...");
 		process.exit()
 	}
