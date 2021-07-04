@@ -1,18 +1,26 @@
+require(`dotenv`).config()
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+const config = require(`../config.json`)
+const { MongoClient } = require('mongodb');
+const client = new MongoClient(process.env.MONGODB_URI_UUID, { useNewUrlParser: true, useUnifiedTopology: true });
 const hy = require(`../utils/hypixel`);
 const mc = require(`../utils/mojang`);
-
-const expirationTime = 600000;
-const BASE_URL = "https://api.hypixel.net";
 router.use(express.json());
-
-let cache = {};
-let formattedPlayer
-let userQuery;
+client.connect(err => {
+	if (err) {
+		console.log("failed to connect to database, aborting...");
+		process.exit()
+	}
+	console.log("Connected to database")
+})
 
 router.get('/', async function (req, res) {
+	let cache = client.db("cache").collection("player")
+	let formattedPlayer
+	let userQuery;
+
 	try {
 		if (!req.query.uuid && !req.query.name) throw new Error(`Missing field(s): [uuid] or [name]`);
 		if (req.query.name && !req.query.uuid) {
@@ -22,47 +30,53 @@ router.get('/', async function (req, res) {
 			userQuery = typeof (req.query.uuid) == "object" ? req.query.uuid[0].toLowerCase() : req.query.uuid.toLowerCase();
 		}
 
-		if (!cache[userQuery] || new Date().getTime() > cache[userQuery]?.expiresAt) {
+		const cacheUser = await cache.findOne({ uuid: userQuery })
+
+		if (cacheUser == null || new Date().getTime() > cacheUser?.expiresAt) {
 			// _ Actually fetch user data
-			const response = await fetch(`${BASE_URL}/player?uuid=${userQuery}&key=${process.env.HYPIXEL_API_KEY}`);
+			const response = await fetch(`${config.BASE_URL}/player?uuid=${userQuery}&key=${process.env.HYPIXEL_API_KEY}`);
 			if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
 			const json = await response.json()
 			const player = json.player
+			if (player == null) {
+				throw new Error("This user has not logged on to Hypixel")
+			}
+
 
 			// _ Getting data Hypixel made harder to retreive
 			const playerRank = hy.getPlayerRank(player)
-			const playerLevel = hy.calculatePlayerLevel(player.networkExp)
+			const playerLevel = hy.calculatePlayerLevel(player?.networkExp ?? 0)
 			const online = await hy.getPlayerStatus(userQuery)
+
 
 			// _ Massive formatted data
 			formattedPlayer = {
 				// General Info
 				uuid: player.uuid,
-				displayName: player.displayname,
-				level: playerLevel,
-				chat: player.channel,
-				language: player.userLanguage,
+				displayName: player.displayname ?? undefined,
+				level: playerLevel ?? undefined,
+				chat: player.channel ?? undefined,
+				language: player.userLanguage ?? undefined,
 
 				// Login And last game
 				online: online,
-				lastVersion: player.mcVersionRp,
+				lastVersion: player.mcVersionRp ?? undefined,
 				lastLogin: player.lastLogin,
 				lastLogout: player.lastLogout,
-				lastGame: player.mostRecentGameType,
+				lastGame: player.mostRecentGameType ?? undefined,
 
 				// The Other Statistics
-				karma: player.karma,
-				achievementPoints: player.achievementPoints,
-				achievementsCompleted: player.achievementsOneTime.length,
-				// ! quests: 0,
+				karma: player.karma ?? undefined,
+				achievementPoints: player.achievementPoints ?? undefined,
+				achievementsCompleted: player.achievementsOneTime.length ?? undefined,
 
 				// Cosmetics
 				cosmetics: {
 					count: player.vanityMeta?.packages.length ?? 0,
-					gadget: player.currentGadget,
-					clickEffect: player.currentClickEffect,
-					cloak: player.currentCloak,
-					hat: player.currentHat,
+					gadget: player.currentGadget ?? undefined,
+					clickEffect: player.currentClickEffect ?? undefined,
+					cloak: player.currentCloak ?? undefined,
+					hat: player.currentHat ?? undefined,
 
 					// PET
 					pet: player.currentPet ? {
@@ -109,12 +123,12 @@ router.get('/', async function (req, res) {
 
 				// Socials
 				social: player?.socialMedia ? {
-					twitter: player.socialMedia?.links?.TWITTER,
-					youtube: player.socialMedia?.links?.YOUTUBE,
-					instagram: player.socialMedia?.links?.INSTAGRAM,
-					twitch: player.socialMedia?.links?.TWITCH,
-					discord: player.socialMedia?.links?.DISCORD,
-					hypixel: player.socialMedia?.links?.HYPIXEL,
+					twitter: player.socialMedia?.links?.TWITTER ?? undefined,
+					youtube: player.socialMedia?.links?.YOUTUBE ?? undefined,
+					instagram: player.socialMedia?.links?.INSTAGRAM ?? undefined,
+					twitch: player.socialMedia?.links?.TWITCH ?? undefined,
+					discord: player.socialMedia?.links?.DISCORD ?? undefined,
+					hypixel: player.socialMedia?.links?.HYPIXEL ?? undefined,
 				} : undefined,
 
 				// Daily Reward
@@ -131,21 +145,30 @@ router.get('/', async function (req, res) {
 					rankColour: player.monthlyRankColor
 				},
 
-
 				// Ranks Gifted
 				gifted: player.giftingMeta ? {
-					giftsGiven: player.giftingMeta.bundlesGiven,
-					giftsReceived: player.giftingMeta.bundlesReceived,
-					ranksGiven: player.giftingMeta.ranksGiven
+					giftsGiven: player.giftingMeta.bundlesGiven ?? undefined,
+					giftsReceived: player.giftingMeta.bundlesReceived ?? undefined,
+					ranksGiven: player.giftingMeta.ranksGiven ?? undefined
 				} : undefined,
 
-				expiresAt: new Date().getTime() + expirationTime,
-				// Game Statistics
-				// WILL BE THEIR OWN ENDPOINT
+				expiresAt: new Date().getTime() + config.expirationTime,
 			};
-			cache[userQuery] = formattedPlayer;
+			const cleanedFormatted = removeEmpty(formattedPlayer)
+
+
+			// _ Update Database
+			if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
+				if (err) throw new Error(`Error inserting to database: ${err}`)
+			})
+			else cache.updateOne({ _id: cacheUser._id }, cleanedFormatted, (err, res) => {
+				if (err) throw new Error(`Error inserting to database: ${err}`)
+			})
+
 		} else {
-			formattedPlayer = cache[userQuery]
+			delete cacheUser._id
+			delete cacheUser.expiresAt
+			formattedPlayer = cacheUser
 		}
 
 		res.status(200).send({
@@ -159,3 +182,11 @@ router.get('/', async function (req, res) {
 })
 
 module.exports = router
+
+function removeEmpty(obj) {
+	return Object.fromEntries(
+		Object.entries(obj)
+			.filter(([_, v]) => v != null)
+			.map(([k, v]) => [k, v === Object(v) ? removeEmpty(v) : v])
+	);
+}
