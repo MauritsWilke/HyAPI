@@ -172,6 +172,7 @@ router.get('/', async function (req, res) {
 			formattedPlayer = cacheUser
 		}
 
+		delete formattedPlayer.expiresAt
 		res.status(200).send({
 			...formattedPlayer
 		})
