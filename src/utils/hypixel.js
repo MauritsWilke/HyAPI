@@ -53,6 +53,14 @@ async function getPlayerStatus(uuid) {
 	return json.session.online
 }
 
+/**
+ * Returns the exact guild level of a player
+ * @param {number} exp 
+ * @returns {number} level
+ * @example 
+ * // Returns 1
+ * const guildLevel = getGuildLevel(247843)
+ */
 function getGuildLevel(exp) {
 	if (exp < 100000) return 0
 	if (exp < 250000) return 1
