@@ -82,6 +82,54 @@ Requires either **uuid** or **name**
 
 Using name **won't** prevent you from making further requests, unlike the Hypixel Api.
 
+### 🎛 Options
+
+Player also allows for multiple options, these are disabled by default as for they make the first request and any request after the cache time has expired twice or trice as slow.
+This is because it requires more requests to the Hypixel API
+
+```http
+  &options=
+```
+
+| Option    | Description                             |
+| :-------- | :-------------------------------------- |
+| `guild`   | Adds the `guild` object to the response |
+| `friends` | Adds the `friend` count to the response |
+
+<details>
+<summary>Guild Object</summary>
+
+```json
+"guild": {
+        "name": "Bedwars",
+        "exp": 69637363,
+        "level": 30,
+        "description": "Bedwars Go Brrrrr",
+        "tag": {
+            "text": "BEDWAR",
+            "colour": "DARK_GREEN",
+            "hex": "#00AA00"
+        },
+        "member": {
+            "rank": "Guild Master",
+            "tag": "GM",
+            "quests": 1665,
+            "joinedAt": 1593624025152,
+            "expHistory": {
+                "2021-07-06": 0,
+                "2021-07-05": 24309,
+                "2021-07-04": 7021,
+                "2021-07-03": 44410,
+                "2021-07-02": 39752,
+                "2021-07-01": 0,
+                "2021-06-30": 8162
+            }
+        }
+    },
+```
+
+</details>
+
 ## ❓ FAQ
 
 #### Why isn't `path.color` working?
