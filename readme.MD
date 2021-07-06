@@ -100,12 +100,12 @@ Requires either **uuid** or **name**
 | `uuid` | `string` | The uudi of the requested player |
 | `name` | `string` | The username of the requested player |
 
-Using `name` **won't** prevent you from making further requests, unlike the Hypixel Api.
+Using `name` **won't** prevent you from making further requests, unlike the Hypixel API.
 
 ### 🎛 Options
 
-`Player` also allows for multiple options, these are disabled by default as for they make the first request and any request after the cache time has expired twice or trice as slow.
-This is because it requires more requests to the Hypixel API
+`Player` allows for multiple options. These are disabled by default because it can double or tripple the response time.
+This is because it requires more requests from the Hypixel API.
 
 ```http
   &options=<options>
