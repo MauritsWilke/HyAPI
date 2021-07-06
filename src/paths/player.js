@@ -16,7 +16,7 @@ client.connect(err => {
 		console.log("failed to connect to database, aborting...");
 		process.exit()
 	}
-	console.log("Connected to database")
+	console.log("Connected to database from player.js")
 })
 
 router.get('/', async function (req, res) {
@@ -53,12 +53,18 @@ router.get('/', async function (req, res) {
 		const member = guild.members.filter(p => p.uuid == player.uuid)[0]
 		const rank = guild.ranks.filter(rank => rank.name == member.rank)[0]
 
+		// _ Friends 
+		const friendResponse = await fetch(`${config.BASE_URL}/friends?uuid=${userQuery}&key=${process.env.HYPIXEL_API_KEY}`)
+		if (!friendResponse.ok) throw new Error(`${friendResponse.status} ${friendResponse.statusText}`)
+		const friendJson = await friendResponse.json()
+		const friends = friendJson.records.length
+		// const friends = 0;
+
 		// _ Getting data Hypixel made harder to retreive
 		const playerRank = hy.getPlayerRank(player)
 		const playerLevel = hy.calculatePlayerLevel(player?.networkExp ?? 0)
 		const online = await hy.getPlayerStatus(userQuery)
 		const guildLevel = hy.getGuildLevel(guild.exp)
-
 
 		// _ Massive formatted data
 		formattedPlayer = {
@@ -67,6 +73,7 @@ router.get('/', async function (req, res) {
 			displayName: player.displayname ?? undefined,
 			networkExp: player.networkExp,
 			level: playerLevel ?? undefined,
+			friends: friends,
 			chat: player.channel ?? undefined,
 			language: player.userLanguage ?? undefined,
 
