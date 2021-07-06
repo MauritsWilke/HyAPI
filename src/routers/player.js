@@ -32,7 +32,6 @@ router.get('/', async function (req, res) {
 		} else userQuery = typeof (req.query.uuid) == "object" ? req.query.uuid[0].toLowerCase() : req.query.uuid.toLowerCase();
 
 		const options = typeof (req.query?.options) == "object" ? req.query.options : req.query?.options?.toLowerCase().split(/ +/) ?? []
-		console.log(options)
 
 		const cacheUser = await cache.findOne({ uuid: userQuery })
 		const cacheHasFriends = cacheUser?.friends ? true : false;
