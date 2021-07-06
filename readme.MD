@@ -68,6 +68,26 @@ The base URL for all requests is:
   https://hyapi.tech/
 ```
 
+<details>
+<summary>All current paths</summary>
+
+```http
+  /key
+  /player
+  /paths
+```
+
+</details>
+
+### 🔒 Authentication
+
+The API requires authentication in the form of a `key` in the request URL. \
+To check out the API without authentication, use key `beta`
+
+```http
+  &key=<key>
+```
+
 ### 📖 Examples
 
 ```http
@@ -84,11 +104,16 @@ Using `name` **won't** prevent you from making further requests, unlike the Hypi
 
 ### 🎛 Options
 
+<<<<<<< Updated upstream
 Player allows for multiple options. These are disabled by default becuase after the cache time has expired they make the first request and any request after  twice or thrice as slow.
 This is because it requires more requests from the Hypixel API.
+=======
+`Player` also allows for multiple options, these are disabled by default as for they make the first request and any request after the cache time has expired twice or trice as slow.
+This is because it requires more requests to the Hypixel API
+>>>>>>> Stashed changes
 
 ```http
-  &options=
+  &options=<options>
 ```
 
 | Option    | Description                             |
