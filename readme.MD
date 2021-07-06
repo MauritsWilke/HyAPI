@@ -104,13 +104,8 @@ Using `name` **won't** prevent you from making further requests, unlike the Hypi
 
 ### 🎛 Options
 
-<<<<<<< Updated upstream
-Player allows for multiple options. These are disabled by default becuase after the cache time has expired they make the first request and any request after  twice or thrice as slow.
-This is because it requires more requests from the Hypixel API.
-=======
 `Player` also allows for multiple options, these are disabled by default as for they make the first request and any request after the cache time has expired twice or trice as slow.
 This is because it requires more requests to the Hypixel API
->>>>>>> Stashed changes
 
 ```http
   &options=<options>
