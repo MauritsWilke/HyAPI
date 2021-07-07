@@ -33,7 +33,7 @@ router.get('/', async function (req, res) {
 
 		const options = typeof (req.query?.options) == "object" ? req.query.options : req.query?.options?.toLowerCase().split(/ +/) ?? []
 
-		const cacheUser = await cache.findOne({ uuid: userQuery })
+		const cacheUser = null //await cache.findOne({ uuid: userQuery })
 		const cacheHasFriends = cacheUser?.friends ? true : false;
 		const cacheHasGuild = cacheUser?.guild ? true : false;
 
@@ -75,6 +75,8 @@ router.get('/', async function (req, res) {
 			const playerRank = hy.getPlayerRank(player)
 			const playerLevel = hy.calculatePlayerLevel(player?.networkExp ?? 0)
 			const online = await hy.getPlayerStatus(userQuery)
+			const challenges = hy.getTotalChallenges(player.challenges)
+			const quests = hy.getTotalQuests(player.quests)
 
 			// _ Massive formatted data
 			formattedPlayer = {
@@ -98,6 +100,8 @@ router.get('/', async function (req, res) {
 				karma: player.karma ?? undefined,
 				achievementPoints: player.achievementPoints ?? undefined,
 				achievementsCompleted: player.achievementsOneTime.length ?? undefined,
+				challenges: challenges,
+				quests: quests,
 
 				// Rank
 				rank: {
@@ -210,14 +214,14 @@ router.get('/', async function (req, res) {
 
 			const cleanedFormatted = removeEmpty(formattedPlayer)
 
-			// _ Update Database
-			if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
-				if (err) throw new Error(`Error inserting to database: ${err}`)
-			})
-			else
-				cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
-					if (err) throw new Error(`Error inserting to database: ${err}`)
-				})
+			// // _ Update Database
+			// if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
+			// 	if (err) throw new Error(`Error inserting to database: ${err}`)
+			// })
+			// else
+			// 	cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
+			// 		if (err) throw new Error(`Error inserting to database: ${err}`)
+			// 	})
 
 		} else {
 			delete cacheUser._id

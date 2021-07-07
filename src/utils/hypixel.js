@@ -6,7 +6,9 @@ module.exports = {
 	calculatePlayerLevel,
 	getPlayerStatus,
 	getPlayerRank,
-	getGuildLevel
+	getGuildLevel,
+	getTotalChallenges,
+	getTotalQuests
 }
 
 /**
@@ -73,6 +75,23 @@ function getGuildLevel(exp) {
 	if (exp < 7500000) return 8
 	if (exp >= 7500000) return exp < 15000000 ? Math.floor((exp - 7500000) / 2500000) + 9 : Math.floor((exp - 15000000) / 3000000) + 12
 	return new Error("Something went wrong calculating the guild level")
+}
+
+function getTotalChallenges(challenges) {
+	let count = 0;
+	const allTime = challenges.all_time
+	for (const [key, value] of Object.entries(allTime)) {
+		count += value
+	}
+	return count
+}
+
+function getTotalQuests(quests) {
+	let count = 0;
+	for (const [key, value] of Object.entries(quests)) {
+		count += value?.completions?.length || 0
+	}
+	return count
 }
 
 // TODO Calculate the total quests
