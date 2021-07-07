@@ -48,7 +48,7 @@ function bedwars(player) {
 			bedsBroken: player.stats.Bedwars.eight_one_beds_broken_bedwars,
 			bedsLost: player.stats.Bedwars.eight_one_beds_lost_bedwars,
 			rations: {
-				WLR: Math.round((player.stats.Bedwars.eight_one_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+				WLR: Math.round((player.stats.Bedwars.eight_one_wins_bedwars / player.stats.Bedwars.eight_one_losses_bedwars) * 100) / 100,
 				KDR: Math.round((player.stats.Bedwars.eight_one_kills_bedwars / player.stats.Bedwars.eight_one_deaths_bedwars) * 100) / 100,
 				FKDR: Math.round((player.stats.Bedwars.eight_one_final_kills_bedwars / player.stats.Bedwars.eight_one_final_deaths_bedwars) * 100) / 100,
 				BBLR: Math.round((player.stats.Bedwars.eight_one_beds_broken_bedwars / player.stats.Bedwars.eight_one_beds_lost_bedwars) * 100) / 100
@@ -76,8 +76,8 @@ function bedwars(player) {
 				BBLR: Math.round((player.stats.Bedwars.eight_two_beds_broken_bedwars / player.stats.Bedwars.eight_two_beds_lost_bedwars) * 100) / 100
 			},
 			averages: {
-				finalsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.eight_two_final_kills_bedwars) * 100) / 100,
-				killsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.eight_two_kills_bedwars) * 100) / 100,
+				finalsPerGame: Math.round((player.stats.Bedwars.eight_two_games_played_bedwars / player.stats.Bedwars.eight_two_final_kills_bedwars) * 100) / 100,
+				killsPerGame: Math.round((player.stats.Bedwars.eight_two_games_played_bedwars / player.stats.Bedwars.eight_two_kills_bedwars) * 100) / 100,
 			},
 		},
 		four_three: {
@@ -98,8 +98,8 @@ function bedwars(player) {
 				BBLR: Math.round((player.stats.Bedwars.four_three_beds_broken_bedwars / player.stats.Bedwars.four_three_beds_lost_bedwars) * 100) / 100
 			},
 			averages: {
-				finalsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.four_three_final_kills_bedwars) * 100) / 100,
-				killsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.four_three_kills_bedwars) * 100) / 100,
+				finalsPerGame: Math.round((player.stats.Bedwars.four_three_games_played_bedwars / player.stats.Bedwars.four_three_final_kills_bedwars) * 100) / 100,
+				killsPerGame: Math.round((player.stats.Bedwars.four_three_games_played_bedwars / player.stats.Bedwars.four_three_kills_bedwars) * 100) / 100,
 			},
 		},
 		four_four: {
@@ -120,8 +120,8 @@ function bedwars(player) {
 				BBLR: Math.round((player.stats.Bedwars.four_four_beds_broken_bedwars / player.stats.Bedwars.four_four_beds_lost_bedwars) * 100) / 100
 			},
 			averages: {
-				finalsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.four_four_final_kills_bedwars) * 100) / 100,
-				killsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.four_four_kills_bedwars) * 100) / 100,
+				finalsPerGame: Math.round((player.stats.Bedwars.four_four_games_played_bedwars / player.stats.Bedwars.four_four_final_kills_bedwars) * 100) / 100,
+				killsPerGame: Math.round((player.stats.Bedwars.four_four_games_played_bedwars / player.stats.Bedwars.four_four_kills_bedwars) * 100) / 100,
 			},
 		},
 		two_four: {
@@ -142,12 +142,263 @@ function bedwars(player) {
 				BBLR: Math.round((player.stats.Bedwars.two_four_beds_broken_bedwars / player.stats.Bedwars.two_four_beds_lost_bedwars) * 100) / 100
 			},
 			averages: {
-				finalsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.two_four_final_kills_bedwars) * 100) / 100,
-				killsPerGame: Math.round((player.stats.Bedwars.eight_one_games_played_bedwars / player.stats.Bedwars.two_four_kills_bedwars) * 100) / 100,
+				finalsPerGame: Math.round((player.stats.Bedwars.two_four_games_played_bedwars / player.stats.Bedwars.two_four_final_kills_bedwars) * 100) / 100,
+				killsPerGame: Math.round((player.stats.Bedwars.two_four_games_played_bedwars / player.stats.Bedwars.two_four_kills_bedwars) * 100) / 100,
 			},
 		},
 		dream: {
-
+			armed: {
+				eight_two: {
+					gamesPlayed: player.stats.Bedwars.eight_two_armed_games_played_bedwars,
+					winstreak: player.stats.Bedwars.eight_two_armed_winstreak,
+					wins: player.stats.Bedwars.eight_two_armed_wins_bedwars,
+					losses: player.stats.Bedwars.eight_two_armed_losses_bedwars,
+					kills: player.stats.Bedwars.eight_two_armed_kills_bedwars,
+					deaths: player.stats.Bedwars.eight_two_armed_deaths_bedwars,
+					finalKills: player.stats.Bedwars.eight_two_armed_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.eight_two_armed_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.eight_two_armed_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.eight_two_armed_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.eight_two_armed_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.eight_two_armed_kills_bedwars / player.stats.Bedwars.eight_two_armed_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.eight_two_armed_final_kills_bedwars / player.stats.Bedwars.eight_two_armed_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.eight_two_armed_beds_broken_bedwars / player.stats.Bedwars.eight_two_armed_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.eight_two_armed_games_played_bedwars / player.stats.Bedwars.eight_two_armed_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.eight_two_armed_games_played_bedwars / player.stats.Bedwars.eight_two_armed_kills_bedwars) * 100) / 100,
+					},
+				},
+				four_four: {
+					gamesPlayed: player.stats.Bedwars.four_four_armed_games_played_bedwars,
+					winstreak: player.stats.Bedwars.four_four_armed_winstreak,
+					wins: player.stats.Bedwars.four_four_armed_wins_bedwars,
+					losses: player.stats.Bedwars.four_four_armed_losses_bedwars,
+					kills: player.stats.Bedwars.four_four_armed_kills_bedwars,
+					deaths: player.stats.Bedwars.four_four_armed_deaths_bedwars,
+					finalKills: player.stats.Bedwars.four_four_armed_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.four_four_armed_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.four_four_armed_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.four_four_armed_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.four_four_armed_wins_bedwars / player.stats.Bedwars.four_four_armed_losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.four_four_armed_kills_bedwars / player.stats.Bedwars.four_four_armed_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.four_four_armed_final_kills_bedwars / player.stats.Bedwars.four_four_armed_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.four_four_armed_beds_broken_bedwars / player.stats.Bedwars.four_four_armed_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.four_four_armed_games_played_bedwars / player.stats.Bedwars.four_four_armed_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.four_four_armed_games_played_bedwars / player.stats.Bedwars.four_four_armed_kills_bedwars) * 100) / 100,
+					},
+				},
+			},
+			castle: {
+				gamesPlayed: player.stats.Bedwars.castle_games_played_bedwars,
+				winstreak: player.stats.Bedwars.castle_winstreak,
+				wins: player.stats.Bedwars.castle_wins_bedwars,
+				losses: player.stats.Bedwars.castle_losses_bedwars,
+				kills: player.stats.Bedwars.castle_kills_bedwars,
+				deaths: player.stats.Bedwars.castle_deaths_bedwars,
+				finalKills: player.stats.Bedwars.castle_final_kills_bedwars,
+				finalDeaths: player.stats.Bedwars.castle_final_deaths_bedwars,
+				bedsBroken: player.stats.Bedwars.castle_beds_broken_bedwars,
+				bedsLost: player.stats.Bedwars.castle_beds_lost_bedwars,
+				rations: {
+					WLR: Math.round((player.stats.Bedwars.castle_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+					KDR: Math.round((player.stats.Bedwars.castle_kills_bedwars / player.stats.Bedwars.castle_deaths_bedwars) * 100) / 100,
+					FKDR: Math.round((player.stats.Bedwars.castle_final_kills_bedwars / player.stats.Bedwars.castle_final_deaths_bedwars) * 100) / 100,
+					BBLR: Math.round((player.stats.Bedwars.castle_beds_broken_bedwars / player.stats.Bedwars.castle_beds_lost_bedwars) * 100) / 100
+				},
+				averages: {
+					finalsPerGame: Math.round((player.stats.Bedwars.castle_games_played_bedwars / player.stats.Bedwars.castle_final_kills_bedwars) * 100) / 100,
+					killsPerGame: Math.round((player.stats.Bedwars.castle_games_played_bedwars / player.stats.Bedwars.castle_kills_bedwars) * 100) / 100,
+				},
+			},
+			luckyBlocks: {
+				eight_two: {
+					gamesPlayed: player.stats.Bedwars.eight_two_lucky_games_played_bedwars,
+					winstreak: player.stats.Bedwars.eight_two_lucky_winstreak,
+					wins: player.stats.Bedwars.eight_two_lucky_wins_bedwars,
+					losses: player.stats.Bedwars.eight_two_lucky_losses_bedwars,
+					kills: player.stats.Bedwars.eight_two_lucky_kills_bedwars,
+					deaths: player.stats.Bedwars.eight_two_lucky_deaths_bedwars,
+					finalKills: player.stats.Bedwars.eight_two_lucky_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.eight_two_lucky_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.eight_two_lucky_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.eight_two_lucky_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.eight_two_lucky_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.eight_two_lucky_kills_bedwars / player.stats.Bedwars.eight_two_lucky_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.eight_two_lucky_final_kills_bedwars / player.stats.Bedwars.eight_two_lucky_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.eight_two_lucky_beds_broken_bedwars / player.stats.Bedwars.eight_two_lucky_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.eight_two_lucky_games_played_bedwars / player.stats.Bedwars.eight_two_lucky_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.eight_two_lucky_games_played_bedwars / player.stats.Bedwars.eight_two_lucky_kills_bedwars) * 100) / 100,
+					},
+				},
+				four_four: {
+					gamesPlayed: player.stats.Bedwars.four_four_lucky_games_played_bedwars,
+					winstreak: player.stats.Bedwars.four_four_lucky_winstreak,
+					wins: player.stats.Bedwars.four_four_lucky_wins_bedwars,
+					losses: player.stats.Bedwars.four_four_lucky_losses_bedwars,
+					kills: player.stats.Bedwars.four_four_lucky_kills_bedwars,
+					deaths: player.stats.Bedwars.four_four_lucky_deaths_bedwars,
+					finalKills: player.stats.Bedwars.four_four_lucky_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.four_four_lucky_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.four_four_lucky_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.four_four_lucky_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.four_four_lucky_wins_bedwars / player.stats.Bedwars.four_four_lucky_losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.four_four_lucky_kills_bedwars / player.stats.Bedwars.four_four_lucky_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.four_four_lucky_final_kills_bedwars / player.stats.Bedwars.four_four_lucky_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.four_four_lucky_beds_broken_bedwars / player.stats.Bedwars.four_four_lucky_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.four_four_lucky_games_played_bedwars / player.stats.Bedwars.four_four_lucky_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.four_four_lucky_games_played_bedwars / player.stats.Bedwars.four_four_lucky_kills_bedwars) * 100) / 100,
+					},
+				},
+			},
+			rush: {
+				eight_two: {
+					gamesPlayed: player.stats.Bedwars.eight_two_rush_games_played_bedwars,
+					winstreak: player.stats.Bedwars.eight_two_rush_winstreak,
+					wins: player.stats.Bedwars.eight_two_rush_wins_bedwars,
+					losses: player.stats.Bedwars.eight_two_rush_losses_bedwars,
+					kills: player.stats.Bedwars.eight_two_rush_kills_bedwars,
+					deaths: player.stats.Bedwars.eight_two_rush_deaths_bedwars,
+					finalKills: player.stats.Bedwars.eight_two_rush_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.eight_two_rush_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.eight_two_rush_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.eight_two_rush_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.eight_two_rush_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.eight_two_rush_kills_bedwars / player.stats.Bedwars.eight_two_rush_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.eight_two_rush_final_kills_bedwars / player.stats.Bedwars.eight_two_rush_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.eight_two_rush_beds_broken_bedwars / player.stats.Bedwars.eight_two_rush_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.eight_two_rush_games_played_bedwars / player.stats.Bedwars.eight_two_rush_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.eight_two_rush_games_played_bedwars / player.stats.Bedwars.eight_two_rush_kills_bedwars) * 100) / 100,
+					},
+				},
+				four_four: {
+					gamesPlayed: player.stats.Bedwars.four_four_rush_games_played_bedwars,
+					winstreak: player.stats.Bedwars.four_four_rush_winstreak,
+					wins: player.stats.Bedwars.four_four_rush_wins_bedwars,
+					losses: player.stats.Bedwars.four_four_rush_losses_bedwars,
+					kills: player.stats.Bedwars.four_four_rush_kills_bedwars,
+					deaths: player.stats.Bedwars.four_four_rush_deaths_bedwars,
+					finalKills: player.stats.Bedwars.four_four_rush_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.four_four_rush_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.four_four_rush_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.four_four_rush_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.four_four_rush_wins_bedwars / player.stats.Bedwars.four_four_rush_losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.four_four_rush_kills_bedwars / player.stats.Bedwars.four_four_rush_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.four_four_rush_final_kills_bedwars / player.stats.Bedwars.four_four_rush_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.four_four_rush_beds_broken_bedwars / player.stats.Bedwars.four_four_rush_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.four_four_rush_games_played_bedwars / player.stats.Bedwars.four_four_rush_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.four_four_rush_games_played_bedwars / player.stats.Bedwars.four_four_rush_kills_bedwars) * 100) / 100,
+					},
+				},
+			},
+			ultimate: {
+				eight_two: {
+					gamesPlayed: player.stats.Bedwars.eight_two_ultimate_games_played_bedwars,
+					winstreak: player.stats.Bedwars.eight_two_ultimate_winstreak,
+					wins: player.stats.Bedwars.eight_two_ultimate_wins_bedwars,
+					losses: player.stats.Bedwars.eight_two_ultimate_losses_bedwars,
+					kills: player.stats.Bedwars.eight_two_ultimate_kills_bedwars,
+					deaths: player.stats.Bedwars.eight_two_ultimate_deaths_bedwars,
+					finalKills: player.stats.Bedwars.eight_two_ultimate_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.eight_two_ultimate_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.eight_two_ultimate_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.eight_two_ultimate_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.eight_two_ultimate_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.eight_two_ultimate_kills_bedwars / player.stats.Bedwars.eight_two_ultimate_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.eight_two_ultimate_final_kills_bedwars / player.stats.Bedwars.eight_two_ultimate_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.eight_two_ultimate_beds_broken_bedwars / player.stats.Bedwars.eight_two_ultimate_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.eight_two_ultimate_games_played_bedwars / player.stats.Bedwars.eight_two_ultimate_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.eight_two_ultimate_games_played_bedwars / player.stats.Bedwars.eight_two_ultimate_kills_bedwars) * 100) / 100,
+					},
+				},
+				four_four: {
+					gamesPlayed: player.stats.Bedwars.four_four_ultimate_games_played_bedwars,
+					winstreak: player.stats.Bedwars.four_four_ultimate_winstreak,
+					wins: player.stats.Bedwars.four_four_ultimate_wins_bedwars,
+					losses: player.stats.Bedwars.four_four_ultimate_losses_bedwars,
+					kills: player.stats.Bedwars.four_four_ultimate_kills_bedwars,
+					deaths: player.stats.Bedwars.four_four_ultimate_deaths_bedwars,
+					finalKills: player.stats.Bedwars.four_four_ultimate_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.four_four_ultimate_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.four_four_ultimate_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.four_four_ultimate_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.four_four_ultimate_wins_bedwars / player.stats.Bedwars.four_four_ultimate_losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.four_four_ultimate_kills_bedwars / player.stats.Bedwars.four_four_ultimate_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.four_four_ultimate_final_kills_bedwars / player.stats.Bedwars.four_four_ultimate_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.four_four_ultimate_beds_broken_bedwars / player.stats.Bedwars.four_four_ultimate_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.four_four_ultimate_games_played_bedwars / player.stats.Bedwars.four_four_ultimate_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.four_four_ultimate_games_played_bedwars / player.stats.Bedwars.four_four_ultimate_kills_bedwars) * 100) / 100,
+					},
+				},
+			},
+			voidless: {
+				eight_two: {
+					gamesPlayed: player.stats.Bedwars.eight_two_voidless_games_played_bedwars,
+					winstreak: player.stats.Bedwars.eight_two_voidless_winstreak,
+					wins: player.stats.Bedwars.eight_two_voidless_wins_bedwars,
+					losses: player.stats.Bedwars.eight_two_voidless_losses_bedwars,
+					kills: player.stats.Bedwars.eight_two_voidless_kills_bedwars,
+					deaths: player.stats.Bedwars.eight_two_voidless_deaths_bedwars,
+					finalKills: player.stats.Bedwars.eight_two_voidless_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.eight_two_voidless_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.eight_two_voidless_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.eight_two_voidless_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.eight_two_voidless_wins_bedwars / player.stats.Bedwars.losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.eight_two_voidless_kills_bedwars / player.stats.Bedwars.eight_two_voidless_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.eight_two_voidless_final_kills_bedwars / player.stats.Bedwars.eight_two_voidless_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.eight_two_voidless_beds_broken_bedwars / player.stats.Bedwars.eight_two_voidless_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.eight_two_voidless_games_played_bedwars / player.stats.Bedwars.eight_two_voidless_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.eight_two_voidless_games_played_bedwars / player.stats.Bedwars.eight_two_voidless_kills_bedwars) * 100) / 100,
+					},
+				},
+				four_four: {
+					gamesPlayed: player.stats.Bedwars.four_four_voidless_games_played_bedwars,
+					winstreak: player.stats.Bedwars.four_four_voidless_winstreak,
+					wins: player.stats.Bedwars.four_four_voidless_wins_bedwars,
+					losses: player.stats.Bedwars.four_four_voidless_losses_bedwars,
+					kills: player.stats.Bedwars.four_four_voidless_kills_bedwars,
+					deaths: player.stats.Bedwars.four_four_voidless_deaths_bedwars,
+					finalKills: player.stats.Bedwars.four_four_voidless_final_kills_bedwars,
+					finalDeaths: player.stats.Bedwars.four_four_voidless_final_deaths_bedwars,
+					bedsBroken: player.stats.Bedwars.four_four_voidless_beds_broken_bedwars,
+					bedsLost: player.stats.Bedwars.four_four_voidless_beds_lost_bedwars,
+					rations: {
+						WLR: Math.round((player.stats.Bedwars.four_four_voidless_wins_bedwars / player.stats.Bedwars.four_four_voidless_losses_bedwars) * 100) / 100,
+						KDR: Math.round((player.stats.Bedwars.four_four_voidless_kills_bedwars / player.stats.Bedwars.four_four_voidless_deaths_bedwars) * 100) / 100,
+						FKDR: Math.round((player.stats.Bedwars.four_four_voidless_final_kills_bedwars / player.stats.Bedwars.four_four_voidless_final_deaths_bedwars) * 100) / 100,
+						BBLR: Math.round((player.stats.Bedwars.four_four_voidless_beds_broken_bedwars / player.stats.Bedwars.four_four_voidless_beds_lost_bedwars) * 100) / 100
+					},
+					averages: {
+						finalsPerGame: Math.round((player.stats.Bedwars.four_four_voidless_games_played_bedwars / player.stats.Bedwars.four_four_voidless_final_kills_bedwars) * 100) / 100,
+						killsPerGame: Math.round((player.stats.Bedwars.four_four_voidless_games_played_bedwars / player.stats.Bedwars.four_four_voidless_kills_bedwars) * 100) / 100,
+					},
+				},
+			}
 		}
 	}
 	return reformattedBedwars
