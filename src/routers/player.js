@@ -33,7 +33,7 @@ router.get('/', async function (req, res) {
 
 		const options = typeof (req.query?.options) == "object" ? req.query.options : req.query?.options?.toLowerCase().split(/ +/) ?? []
 
-		const cacheUser = null //await cache.findOne({ uuid: userQuery })
+		const cacheUser = await cache.findOne({ uuid: userQuery })
 		const cacheHasFriends = cacheUser?.friends ? true : false;
 		const cacheHasGuild = cacheUser?.guild ? true : false;
 
@@ -214,14 +214,14 @@ router.get('/', async function (req, res) {
 
 			const cleanedFormatted = removeEmpty(formattedPlayer)
 
-			// // _ Update Database
-			// if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
-			// 	if (err) throw new Error(`Error inserting to database: ${err}`)
-			// })
-			// else
-			// 	cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
-			// 		if (err) throw new Error(`Error inserting to database: ${err}`)
-			// 	})
+			// _ Update Database
+			if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
+				if (err) throw new Error(`Error inserting to database: ${err}`)
+			})
+			else
+				cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
+					if (err) throw new Error(`Error inserting to database: ${err}`)
+				})
 
 		} else {
 			delete cacheUser._id
