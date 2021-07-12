@@ -79,7 +79,7 @@ function getGuildLevel(exp) {
 
 function getTotalChallenges(challenges) {
 	let count = 0;
-	const allTime = challenges.all_time
+	const allTime = challenges?.all_time || []
 	for (const [key, value] of Object.entries(allTime)) {
 		count += value
 	}
@@ -93,14 +93,3 @@ function getTotalQuests(quests) {
 	}
 	return count
 }
-
-// TODO Calculate the total quests
-// function getTotalQuests(player) {
-// 	let totalQuests = 0;
-// 	const quests = Object.values(player.quests);
-// 	for (quest of quests) {
-// 		const count = Object.keys(quest?.completions)
-// 		console.log(count.length)
-// 	}
-// 	return totalQuests
-// }

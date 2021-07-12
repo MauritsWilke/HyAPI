@@ -48,18 +48,38 @@ router.get('/', async function (req, res) {
 			}
 
 			// _ Guild Data
-			let guild = null;
-			let rank = null;
-			let member = null;
-			let guildLevel = null
-			if (options.includes("guild")) {
+			const { guild, member, rank, guildLevel } = await getGuildData()
+			async function getGuildData() {
+				// return early instead of nesting
+				if (!options.includes("guild")) {
+					return {
+						guild: null,
+						member: null,
+						rank: null,
+						guildLevel: null
+					};
+				}
+
 				const guildResponse = await fetch(`${config.BASE_URL}/guild?player=${userQuery}&key=${process.env.HYPIXEL_API_KEY}`)
 				if (!guildResponse.ok) throw new Error(`${guildResponse.status} ${guildResponse.statusText}`);
 				const guildJson = await guildResponse.json()
-				guild = guildJson.guild
-				member = guild.members.filter(p => p.uuid == player.uuid)[0]
-				rank = guild.ranks.filter(rank => rank.name == member.rank)[0]
-				guildLevel = hy.getGuildLevel(guild.exp)
+				if (guildJson.guild === null) return {
+					guild: null,
+					member: null,
+					rank: null,
+					guildLevel: null
+				};
+
+				const guild = guildJson.guild
+				const member = guild.members.find(p => p.uuid == player.uuid)
+				const rank = guild.ranks.find(rank => rank.name == member.rank)
+
+				return {
+					guild,
+					member,
+					rank,
+					guildLevel: hy.getGuildLevel(guild.exp)
+				}
 			}
 
 			// _ Friends  
@@ -68,20 +88,20 @@ router.get('/', async function (req, res) {
 				const friendResponse = await fetch(`${config.BASE_URL}/friends?uuid=${userQuery}&key=${process.env.HYPIXEL_API_KEY}`)
 				if (!friendResponse.ok) throw new Error(`${friendResponse.status} ${friendResponse.statusText}`)
 				const friendJson = await friendResponse.json()
-				friends = friendJson.records.length
+				friends = friendJson.records?.length ?? 0
 			}
 
 			// _ Getting data Hypixel made harder to retreive
 			const playerRank = hy.getPlayerRank(player)
 			const playerLevel = hy.calculatePlayerLevel(player?.networkExp ?? 0)
 			const online = await hy.getPlayerStatus(userQuery)
-			const challenges = hy.getTotalChallenges(player.challenges)
-			const quests = hy.getTotalQuests(player.quests)
+			const challenges = hy.getTotalChallenges(player?.challenges)
+			const quests = hy.getTotalQuests(player?.quests)
 
 			// _ Massive formatted data
 			formattedPlayer = {
 				// General Info
-				uuid: player.uuid,
+				uuid: player.uuid ?? undefined,
 				displayName: player.displayname ?? undefined,
 				networkExp: player.networkExp,
 				level: playerLevel ?? undefined,
@@ -92,8 +112,9 @@ router.get('/', async function (req, res) {
 				// Login And last game
 				online: online,
 				lastVersion: player.mcVersionRp ?? undefined,
-				lastLogin: player.lastLogin,
-				lastLogout: player.lastLogout,
+				firstLogin: player.firstLogin ?? undefined,
+				lastLogin: player.lastLogin ?? undefined,
+				lastLogout: player.lastLogout ?? undefined,
 				lastGame: player.mostRecentGameType ?? undefined,
 
 				// The Other Statistics
@@ -110,11 +131,11 @@ router.get('/', async function (req, res) {
 						colour: player.rankPlusColor,
 						hex: colours[player.rankPlusColor.toLowerCase()],
 					} : undefined,
-					monthlyColour: player.monthlyRankColor
+					rankColour: rankColours[player?.monthlyRankColor || playerRank]
 				},
 
 				// Guild
-				guild: guild ? {
+				guild: guild != null ? {
 					name: guild.name,
 					exp: guild.exp,
 					level: guildLevel,
@@ -248,4 +269,13 @@ function removeEmpty(obj) {
 			.filter(([_, v]) => v != null)
 			.map(([k, v]) => [k, v === Object(v) ? removeEmpty(v) : v])
 	);
+}
+
+const rankColours = {
+	"DEFAULT": colours.gray,
+	"VIP": colours.green,
+	"VIP+": colours.green,
+	"MVP": colours.aqua,
+	"GOLD": colours.gold,
+	"AQUA": colours.aqua
 }

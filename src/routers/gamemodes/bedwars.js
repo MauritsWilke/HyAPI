@@ -5,6 +5,7 @@ function bedwars(player) {
 	if (!player?.stats?.Bedwars) return new Error("This player has not played Bedwars")
 	const reformattedBedwars = {
 		star: player.achievements.bedwars_level,
+		suffix: returnSuffix(player.achievements.bedwars_level),
 		prestige: {
 			type: prestiges[Math.floor(player.achievements.bedwars_level / 100)],
 			hex: prestigeColours[Math.floor(player.achievements.bedwars_level / 100)],
@@ -529,4 +530,10 @@ const prestigeColours = {
 		2: mcColours.gold,
 		3: mcColours.red
 	}
+}
+
+function returnSuffix(level) {
+	if (level <= 1099) return "✫";
+	if (level >= 1100 && level <= 2099) return "✪";
+	return "⚝";
 }
