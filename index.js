@@ -19,11 +19,11 @@ app.use(`/api/player`, auth, player)
 app.use(`/api/key`, auth, keyInfo)
 app.use(`/api/newkey`, newKey)
 app.use(`/api/stats`, auth, stats)
-app.use(`/`, express.static('../Client/public'))
+//app.use(`/`, express.static('../Client/public'))
 
 app.listen(process.env.API_PORT, console.log(`API online on port ${process.env.API_PORT}`))
-// app.use((req, res) => {
-// 	res.status(404).json({
-// 		error: "invalid path"
-// 	})
-// })
+app.use((req, res) => {
+	res.status(404).json({
+		error: "invalid path"
+	})
+})

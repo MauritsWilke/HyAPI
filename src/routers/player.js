@@ -140,11 +140,11 @@ router.get('/', async function (req, res) {
 					exp: guild.exp,
 					level: guildLevel,
 					description: guild.description,
-					tag: {
+					tag: guild?.tag ? {
 						text: guild.tag,
 						colour: guild.tagColor,
 						hex: colours[guild.tagColor.toLowerCase()]
-					},
+					} : undefined,
 					member: {
 						rank: member.rank,
 						tag: rank?.tag ?? "GM",

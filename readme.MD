@@ -3,6 +3,22 @@
 HyAPI is a better version of the Hypixel API. \
 This API was made for getting data from the Hypixel API easier and faster.
 
+## ‼ Quick notice!
+
+The endpoint has changed from
+
+```http
+	https://hyapi.tech/
+```
+
+to
+
+```
+	https://hyapi.tech/api/
+```
+
+Other paths will return invalid!
+
 ## 💡 List of Features
 
 This API has several features that make it better than the Hypixel API 👇
@@ -174,4 +190,4 @@ This means words as `color` will be `colour` and `soccer` will be `football`.
 
 ## 💻 Developer
 
-- [@MauritsWilke](https://www.github.com/MauritsWilke)
+-   [@MauritsWilke](https://www.github.com/MauritsWilke)
