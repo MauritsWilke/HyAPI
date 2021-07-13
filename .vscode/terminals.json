@@ -1,0 +1,20 @@
+{
+    "autorun": true,
+    "terminals": [
+        {
+            "name": "Server",
+            "icon": "server",
+            "description": "HyAPI Nodemon Server",
+            "focus": true,
+            "commands": ["cd server", "nodemon"],
+            "env": { "name": "server", "icon": "server" }
+        },
+        {
+            "name": "Client",
+            "icon": "file-code",
+            "description": "HyAPI run Svelte Client",
+            "focus": true,
+            "commands": ["cd client", "npm run dev"]
+        }
+    ]
+}
