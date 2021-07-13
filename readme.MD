@@ -5,6 +5,10 @@ This API was made for getting data from the Hypixel API easier and faster.
 
 ## ‼ Quick notice!
 
+I was messing with end-points and front-end things even tho i shouldn't in production.
+Fetching data might not even be possible for a day or two.
+Sorry
+
 The endpoint has changed from
 
 ```http

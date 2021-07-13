@@ -14,12 +14,11 @@ const stats = require(`./src/routers/stats`)
 
 // _ LINKING____________________________________________________
 //app.use(`/tracking`, tracking)
-app.use(`/api`, paths)
-app.use(`/api/player`, auth, player)
-app.use(`/api/key`, auth, keyInfo)
-app.use(`/api/newkey`, newKey)
-app.use(`/api/stats`, auth, stats)
-//app.use(`/`, express.static('../Client/public'))
+app.use(`/`, paths)
+app.use(`/player`, auth, player)
+app.use(`/key`, auth, keyInfo)
+app.use(`/newkey`, newKey)
+app.use(`/stats`, auth, stats)
 
 app.listen(process.env.API_PORT, console.log(`API online on port ${process.env.API_PORT}`))
 app.use((req, res) => {
