@@ -1,15 +1,6 @@
 const fetch = require('node-fetch');
+const colours = require(`./minecraftColours.json`)
 const BASE_URL = "https://api.hypixel.net"
-
-module.exports = {
-	getPlayerStatus,
-	calculatePlayerLevel,
-	getPlayerStatus,
-	getPlayerRank,
-	getGuildLevel,
-	getTotalChallenges,
-	getTotalQuests
-}
 
 /**
  * Returns the rank of a player
@@ -20,6 +11,7 @@ module.exports = {
  * const playerRank = getPlayerRank(player)
  */
 function getPlayerRank(player) {
+	if (player.displayname == "Technoblade") return "PIG+++"
 	if (player?.rank) return player.rank;
 	if (player?.monthlyPackageRank) return "MVP++";
 	if (player?.newPackageRank) return player.newPackageRank.replace(/_/, "").replace(/PLUS/, "+");
@@ -40,7 +32,7 @@ function calculatePlayerLevel(playerXP) {
 }
 
 /**
- * Returns the rank of a player
+ * Returns the online status of a player
  * @async
  * @param {string} uuid 
  * @returns {bool} online
@@ -79,7 +71,7 @@ function getGuildLevel(exp) {
 
 function getTotalChallenges(challenges) {
 	let count = 0;
-	const allTime = challenges?.all_time || []
+	const allTime = challenges?.all_time ?? []
 	for (const [key, value] of Object.entries(allTime)) {
 		count += value
 	}
@@ -88,8 +80,31 @@ function getTotalChallenges(challenges) {
 
 function getTotalQuests(quests) {
 	let count = 0;
-	for (const [key, value] of Object.entries(quests)) {
+	const questList = quests ?? []
+	for (const [key, value] of Object.entries(questList)) {
 		count += value?.completions?.length || 0
 	}
 	return count
+}
+
+const rankColours = {
+	"DEFAULT": colours.gray,
+	"VIP": colours.green,
+	"VIP+": colours.green,
+	"MVP": colours.aqua,
+	"GOLD": colours.gold,
+	"AQUA": colours.aqua,
+	"YOUTUBER": colours.red,
+	"ADMIN": colours.red
+}
+
+module.exports = {
+	getPlayerStatus,
+	calculatePlayerLevel,
+	getPlayerStatus,
+	getPlayerRank,
+	getGuildLevel,
+	getTotalChallenges,
+	getTotalQuests,
+	rankColours
 }

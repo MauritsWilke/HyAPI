@@ -5,9 +5,11 @@ const fetch = require('node-fetch');
 const config = require(`../config.json`)
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(process.env.MONGODB_URI_UUID, { useNewUrlParser: true, useUnifiedTopology: true });
+
 const hy = require(`../utils/hypixel`);
 const mc = require(`../utils/mojang`);
 const colours = require(`../utils/minecraftColours.json`)
+const utils = require(`../utils/utils`)
 
 router.use(express.json());
 client.connect(err => {
@@ -33,7 +35,7 @@ router.get('/', async function (req, res) {
 
 		const options = typeof (req.query?.options) == "object" ? req.query.options : req.query?.options?.toLowerCase().split(/ +/) ?? []
 
-		const cacheUser = await cache.findOne({ uuid: userQuery })
+		const cacheUser = null //await cache.findOne({ uuid: userQuery })
 		const cacheHasFriends = cacheUser?.friends ? true : false;
 		const cacheHasGuild = cacheUser?.guild ? true : false;
 
@@ -99,28 +101,28 @@ router.get('/', async function (req, res) {
 			const quests = hy.getTotalQuests(player?.quests)
 
 			// _ Massive formatted data
-			formattedPlayer = {
+			reformattedData = {
 				// General Info
-				uuid: player.uuid ?? undefined,
-				displayName: player.displayname ?? undefined,
+				uuid: player.uuid ?? null,
+				displayName: player.displayname ?? null,
 				networkExp: player.networkExp,
-				level: playerLevel ?? undefined,
-				friends: friends ?? undefined,
-				chat: player.channel ?? undefined,
-				language: player.userLanguage ?? undefined,
+				level: playerLevel ?? null,
+				friends: friends ?? null,
+				chat: player.channel ?? null,
+				language: player.userLanguage ?? null,
 
 				// Login And last game
 				online: online,
-				lastVersion: player.mcVersionRp ?? undefined,
-				firstLogin: player.firstLogin ?? undefined,
-				lastLogin: player.lastLogin ?? undefined,
-				lastLogout: player.lastLogout ?? undefined,
-				lastGame: player.mostRecentGameType ?? undefined,
+				lastVersion: player.mcVersionRp ?? null,
+				firstLogin: player.firstLogin ?? null,
+				lastLogin: player.lastLogin ?? null,
+				lastLogout: player.lastLogout ?? null,
+				lastGame: player.mostRecentGameType ?? null,
 
 				// The Other Statistics
-				karma: player.karma ?? undefined,
-				achievementPoints: player.achievementPoints ?? undefined,
-				achievementsCompleted: player.achievementsOneTime.length ?? undefined,
+				karma: player.karma ?? null,
+				achievementPoints: player.achievementPoints ?? null,
+				achievementsCompleted: player?.achievementsOneTime?.length ?? 0,
 				challenges: challenges,
 				quests: quests,
 
@@ -130,8 +132,8 @@ router.get('/', async function (req, res) {
 					plus: player.rankPlusColor ? {
 						colour: player.rankPlusColor,
 						hex: colours[player.rankPlusColor.toLowerCase()],
-					} : undefined,
-					rankColour: rankColours[player?.monthlyRankColor || playerRank]
+					} : null,
+					rankColour: playerRank == "PIG+++" ? colours.light_purple : hy.rankColours[player?.monthlyRankColor || playerRank]
 				},
 
 				// Guild
@@ -144,7 +146,7 @@ router.get('/', async function (req, res) {
 						text: guild.tag,
 						colour: guild.tagColor,
 						hex: colours[guild.tagColor.toLowerCase()]
-					} : undefined,
+					} : null,
 					member: {
 						rank: member.rank,
 						tag: rank?.tag ?? "GM",
@@ -152,23 +154,23 @@ router.get('/', async function (req, res) {
 						joinedAt: member.joined,
 						expHistory: member.expHistory,
 					},
-				} : undefined,
+				} : null,
 
 				// Cosmetics
 				cosmetics: {
 					count: player.vanityMeta?.packages.length ?? 0,
-					gadget: player.currentGadget ?? undefined,
-					clickEffect: player.currentClickEffect ?? undefined,
-					cloak: player.currentCloak ?? undefined,
-					hat: player.currentHat ?? undefined,
+					gadget: player.currentGadget ?? null,
+					clickEffect: player.currentClickEffect ?? null,
+					cloak: player.currentCloak ?? null,
+					hat: player.currentHat ?? null,
 
 					// PET
 					pet: player.currentPet ? {
-						name: player.petStats[player.currentPet]?.name ? player.petStats[player.currentPet]?.name.replace(/§./gi, "") : undefined,
-						hunger: player.petStats[player.currentPet]?.HUNGER ?? undefined,
-						exercise: player.petStats[player.currentPet]?.EXERCISE ?? undefined,
-						type: player.currentPet ?? undefined
-					} : undefined,
+						name: player.petStats[player.currentPet]?.name ? player.petStats[player.currentPet]?.name.replace(/§./gi, "") : null,
+						hunger: player.petStats[player.currentPet]?.HUNGER ?? null,
+						exercise: player.petStats[player.currentPet]?.EXERCISE ?? null,
+						type: player.currentPet ?? null
+					} : null,
 
 					totem: player.achievementTotem ? {
 						maxLength: player.achievementTotem.allowed_max_height,
@@ -176,73 +178,74 @@ router.get('/', async function (req, res) {
 							0: player.achievementTotem.selectedParts.slot_0 ? {
 								type: player.achievementTotem.selectedParts.slot_0,
 								colour: player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 							1: player.achievementTotem.selectedParts.slot_1 ? {
 								type: player.achievementTotem.selectedParts.slot_1,
 								colour: player.achievementTotem.selectedColors.slotcolor_1 ?? player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 							2: player.achievementTotem.selectedParts.slot_2 ? {
 								type: player.achievementTotem.selectedParts.slot_2,
 								colour: player.achievementTotem.selectedColors.slotcolor_2 ?? player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 							3: player.achievementTotem.selectedParts.slot_3 ? {
 								type: player.achievementTotem.selectedParts.slot_3,
 								colour: player.achievementTotem.selectedColors.slotcolor_3 ?? player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 							4: player.achievementTotem.selectedParts.slot_4 ? {
 								type: player.achievementTotem.selectedParts.slot_4,
 								colour: player.achievementTotem.selectedColors.slotcolor_4 ?? player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 							5: player.achievementTotem.selectedParts.slot_5 ? {
 								type: player.achievementTotem.selectedParts.slot_5,
 								colour: player.achievementTotem.selectedColors.slotcolor_5 ?? player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 							6: player.achievementTotem.selectedParts.slot_6 ? {
 								type: player.achievementTotem.selectedParts.slot_6,
 								colour: player.achievementTotem.selectedColors.slotcolor_6 ?? player.achievementTotem.selectedColors.slotcolor_0,
-							} : undefined,
+							} : null,
 						}
-					} : undefined,
+					} : null,
 				},
 
 				// Socials
 				social: player?.socialMedia ? {
-					twitter: player.socialMedia?.links?.TWITTER ?? undefined,
-					youtube: player.socialMedia?.links?.YOUTUBE ?? undefined,
-					instagram: player.socialMedia?.links?.INSTAGRAM ?? undefined,
-					twitch: player.socialMedia?.links?.TWITCH ?? undefined,
-					discord: player.socialMedia?.links?.DISCORD ?? undefined,
-					hypixel: player.socialMedia?.links?.HYPIXEL ?? undefined,
-				} : undefined,
+					twitter: player.socialMedia?.links?.TWITTER ?? null,
+					youtube: player.socialMedia?.links?.YOUTUBE ?? null,
+					instagram: player.socialMedia?.links?.INSTAGRAM ?? null,
+					twitch: player.socialMedia?.links?.TWITCH ?? null,
+					discord: player.socialMedia?.links?.DISCORD ?? null,
+					hypixel: player.socialMedia?.links?.HYPIXEL ?? null,
+				} : null,
 
 				// Daily Reward
 				dailyReward: player?.lastClaimedReward ? {
 					availableIn: (86400000 - (new Date() - (player.lastClaimedReward))) < 0 ? 0 : 86400000 - (new Date() - (player.lastClaimedReward)),
 					streak: player.rewardStreak,
 					highScore: player.rewardHighScore
-				} : undefined,
+				} : null,
 
 
 				// Ranks Gifted
 				gifted: player.giftingMeta ? {
-					giftsGiven: player.giftingMeta.bundlesGiven ?? undefined,
-					giftsReceived: player.giftingMeta.bundlesReceived ?? undefined,
-					ranksGiven: player.giftingMeta.ranksGiven ?? undefined
-				} : undefined,
+					giftsGiven: player.giftingMeta.bundlesGiven ?? null,
+					giftsReceived: player.giftingMeta.bundlesReceived ?? null,
+					ranksGiven: player.giftingMeta.ranksGiven ?? null
+				} : null,
 
 				expiresAt: new Date().getTime() + config.expirationTime,
 			};
 
-			const cleanedFormatted = removeEmpty(formattedPlayer)
+			formattedPlayer = utils.removeEmpty(reformattedData)
 
 			// _ Update Database
 			if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
 				if (err) throw new Error(`Error inserting to database: ${err}`)
 			})
-			else
+			else {
 				cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
 					if (err) throw new Error(`Error inserting to database: ${err}`)
 				})
+			}
 
 		} else {
 			delete cacheUser._id
@@ -262,20 +265,3 @@ router.get('/', async function (req, res) {
 })
 
 module.exports = router
-
-function removeEmpty(obj) {
-	return Object.fromEntries(
-		Object.entries(obj)
-			.filter(([_, v]) => v != null)
-			.map(([k, v]) => [k, v === Object(v) ? removeEmpty(v) : v])
-	);
-}
-
-const rankColours = {
-	"DEFAULT": colours.gray,
-	"VIP": colours.green,
-	"VIP+": colours.green,
-	"MVP": colours.aqua,
-	"GOLD": colours.gold,
-	"AQUA": colours.aqua
-}

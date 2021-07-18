@@ -15,7 +15,7 @@ client.connect(err => {
 module.exports = async (req, res, next) => {
 	let keyDB = client.db("keys").collection("keys")
 	try {
-		if (!req.query.key) throw new Error(`Missing field(s): [key]`)
+		if (!req.query.key) throw new Error(`Missing field(s): [key] 404`)
 		const queryKey = typeof (req.query.key) == "object" ? req.query.key[0] : req.query.key;
 		const key = await keyDB.findOne({ key: queryKey })
 		if (key == null) throw new Error(`Invalid key`)
@@ -23,14 +23,14 @@ module.exports = async (req, res, next) => {
 			lastMin = new Date().getMinutes()
 			keyDB.updateOne({ key: key.key }, { $set: { queriesLastMin: 0 } })
 		}
-		if (key.queriesLastMin >= key.limit) throw new Error(`Reached query limit per minute [${key.limit}]`)
+		if (key.queriesLastMin >= key.limit) throw new Error(`Reached query limit per minute [${key.limit}] 429`)
 
 		keyDB.updateOne({ key: key.key }, { $set: { queriesLastMin: +key.queriesLastMin + 1 } })
 
 		next()
 	} catch (e) {
-		res.status(404).json({
-			error: e.message
+		res.status(e.message.slice(e.message.length - 3, e.message.length)).json({
+			error: e.message.slice(0, e.message.length - 4)
 		})
 	}
 }
