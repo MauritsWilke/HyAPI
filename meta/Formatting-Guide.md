@@ -6,7 +6,37 @@ Don't be scared away by the long list of guidelines, most are obvious and are ju
 
 Even the small gamemodes count :)
 
+<details>
+<summary>Reformatting Status</summary>
+
+### 🟥 To Do
+
+-   Skywars
+-   Arcade
+-   TNT Games
+-   Murder Mystery
+-   Classic Games
+    -   VampireZ
+    -   TKR
+    -   Paintball
+    -   Mega Walls
+-   UHC
+-   Build Battle
+
+### 🟡 In progress
+
+-   Duels
+
+### 🟢 Done!
+
+-   Bedwars
+
+</details>
+
 ---
+
+Before reformatting, make sure the gamemode you are planning on reformatting isn't already in progress or done.\
+Please also notify me when you are planning on reformatting by starting a new discussion [here](https://github.com/MauritsWilke/HyAPI/discussions/categories/reformatting-notice) with the gamemode you are planning on reformatting.
 
 1. Make sure you have an API key for the Hypixel API. You can get this by going to `mc.hypixel.net` and running `/api new`
 
@@ -200,7 +230,9 @@ Even the small gamemodes count :)
                 -   epicWinstreak
                 -   poggerKills
 
-## Submitting data
+</br>
+
+## 📨 Submitting data
 
 You can submit data by creating a [gist](https://gist.github.com/) and copy pasting the reformatted data in there!
 After creating and saving your gist, create a new issue with in the title `#Formatting` and include a link to your gist in the body. By doing so I can easily find it in between the loads of bugs that need fixing 😓

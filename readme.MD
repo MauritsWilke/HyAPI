@@ -3,25 +3,10 @@
 HyAPI is a better version of the Hypixel API. \
 This API was made for getting data from the Hypixel API easier and faster.
 
-## ‼ Quick notice!
+## 👉 Wanna help?
 
-I was messing with end-points and front-end things even tho i shouldn't in production.
-Fetching data might not even be possible for a day or two.
-Sorry
-
-The endpoint has changed from
-
-```http
-	https://hyapi.tech/
-```
-
-to
-
-```
-	https://hyapi.tech/api/
-```
-
-Other paths will return invalid!
+Hi! Reformatting is a lot of work so I decided to allow others to help me.
+If you hate having free time or just wanna help, head over to the [Formatting Guide](https://github.com/MauritsWilke/HyAPI/blob/master/meta/Formatting-Guide.md) to help me out!
 
 ## 💡 List of Features
 
@@ -85,7 +70,7 @@ This allows requests to be made more specific and to deliver data faster!
 The base URL for all requests is:
 
 ```http
-  https://hyapi.tech/
+  https://hyapi.tech/api
 ```
 
 <details>
