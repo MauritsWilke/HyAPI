@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
 		if (!req.query.key) throw new Error(`Missing field(s): [key] 404`)
 		const queryKey = typeof (req.query.key) == "object" ? req.query.key[0] : req.query.key;
 		const key = await keyDB.findOne({ key: queryKey })
-		if (key == null) throw new Error(`Invalid key`)
+		if (!key) throw new Error(`Invalid key`)
 		if (new Date().getMinutes() != lastMin) {
 			lastMin = new Date().getMinutes()
 			keyDB.updateOne({ key: key.key }, { $set: { queriesLastMin: 0 } })

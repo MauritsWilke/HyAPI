@@ -4,28 +4,19 @@
  * @param {value} remove The value to clean
  * @returns {object} New cleaned object
  */
-function cleanObject(object, remove) {
-	if (!object) return new Error(`Missing object`)
-	return Object.fromEntries(
-		Object.entries(object)
-			.filter(([key, value]) => value != remove)
-			.map(([key, value]) => [key, value === Object(value) ? delete value : value])
-	);
+function removeEmpty(obj) {
+	for (const value in obj) {
+		if (obj[value] === null || obj[value] === undefined || (isNaN(obj[value]) && typeof obj[value] === "number")) {
+			delete obj[value]
+		}
+		if (typeof obj[value] === "object") {
+			removeEmpty(obj[value])
+			if (Object.keys(obj[value])?.length === 0) delete obj[value]
+		}
+	}
+	return obj
 }
 
-/**
- * Returns a new object where certain values have been removed
- * @param {object} object The object to clean 
- * @param {value} remove The value to clean
- * @returns {object} New cleaned object
- */
-function removeEmpty(obj) {
-	return Object.fromEntries(
-		Object.entries(obj)
-			.filter(([k, v]) => v != null)
-			.map(([k, v]) => [k, v === Object(v) ? removeEmpty(v) : v])
-	);
-}
 
 module.exports = {
 	removeEmpty,
