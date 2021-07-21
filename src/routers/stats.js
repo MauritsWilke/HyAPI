@@ -25,9 +25,9 @@ router.get('/:gamemode?', async function (req, res) {
 			throw new Error("This user has not logged on to Hypixel")
 		}
 
-		res.status(200).send({
-			stats: gamemodes[req.params.gamemode.toLowerCase()]?.(player) ?? "invalid gamemode"
-		})
+		res.status(200).send(
+			gamemodes[req.params.gamemode.toLowerCase()]?.(player) ?? "invalid gamemode"
+		)
 	} catch (err) {
 		res.status(404).json({
 			error: err.message

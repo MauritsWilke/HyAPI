@@ -12,24 +12,150 @@ Even the small gamemodes count :)
 ### 🟥 To Do
 
 -   Skywars
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Solo
+        -               Normal
+        -   Insane
+    -   Doubles
+        -   Normal
+        -   Insane
+    -   Ranked
+    -   Mega
+    -   Laboratory
+        -               This one has more sub-modes but I dont know all of them
+        -   Hunters vs Beast
+        -   TnT Madness
+        -   Slime knockout
+        -   Lucky Blocks
+
+    </details>
+
 -   Arcade
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Zombies
+    -   Hide and Seek
+    -   Capture the Wool
+    -   Hole in the Wall
+    -   The Blocking Dead
+    -   Farm Hunt
+    -   Creeper Attack
+    -   Party Games
+    -   Hypixel says
+    -   Pixel Painters
+    -   Football
+    -   Mini Walls
+    -   Bounty Hunters
+    -   Ender Spleef
+    -   Galaxy Wars
+    -   Dragon Wars
+
+    </details>
+
 -   TNT Games
--   Murder Mystery
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Bow Spleef
+    -   PVP Run
+    -   TNT Run
+    -   TNT Tag
+    -   Wizards
+
+    </details>
+
 -   Classic Games
+    <details>
+    <summary>Sub-modes</summary>
+
     -   VampireZ
     -   TKR
     -   Paintball
-    -   Mega Walls
+    -   Arena Brawl
+    -   Quakecraft
+    -   The Walls
+
+    </details>
+
 -   UHC
--   Build Battle
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Speed UHC
+        -               Solo Normal
+        -   Teams Normal
+    -   Solo
+    -   Teams of 3
+
+    </details>
+
+-   Cops and Crims
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Defusal
+    -   Challenge Mode
+    -   Team Deathmatch
+
+    </details>
+
+-   Housing?
+-   The Pit
+-   Blitz SG
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Solo Normal
+    -   Teams Normal
+
+    </details>
+
+-   Mega Walls
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Face Off
+    -   Standard
+    -   Challenge
+
+    </details>
+
+-   Smash Heroes
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Solo (1v1v1v1)
+    -   Teams (2v2)
+    -   Teams (2v2v2)
+    -   Friends?
+    -   Solo (1v1)
+
+    </details>
+
+-   Warlords
+    <details>
+    <summary>Sub-modes</summary>
+
+    -   Capture the Flag
+    -   Domination
+    -   Team Deathmatch
+
+    </details>
+
+-   Skyblock may be added in a later version because of the insane amount of reformatting needed.
 
 ### 🟡 In progress
 
+-   Murder Mystery
 -   Duels
 
 ### 🟢 Done!
 
 -   Bedwars
+-   Build Battle
 
 </details>
 
@@ -40,7 +166,11 @@ Please also notify me when you are planning on reformatting by starting a new di
 
 1. Make sure you have an API key for the Hypixel API. You can get this by going to `mc.hypixel.net` and running `/api new`
 
+<br>
+
 2. Go to the lobby of the gamemode you want to reformat the data for and get the number one player from the all-time leaderboards.
+
+<br>
 
 3. Open the link
 
@@ -48,9 +178,15 @@ Please also notify me when you are planning on reformatting by starting a new di
 	https://api.hypixel.net/player?name=<name>&key=<key>
 ```
 
+<br>
+
 4.  To make life easier, use ctrl+f or a built in search page shortcut and search for `stats`
 
+<br>
+
 5.  The reformatted data is going to be a Javascript Object so reformatting must be done in a `.json` file
+
+<br>
 
 6.  Now for the actual reformatting, here are some guidelines:<br>
 
@@ -61,10 +197,11 @@ Please also notify me when you are planning on reformatting by starting a new di
             -   Kills
             -   Losses
             -   Coins
+        -   `Enabled` cosmetics (Current death message etc)
         -   ❌ Don't include
             -   Types of kills (magicKills, poisonKills)
             -   Types of deaths (suffocation, drowning)
-            -   Owned cosmetics (including a count is allowed)
+            -   All owned cosmetics (including a count is allowed)
             -   Selected preferences
 
     -   Please use the entire path to the statistics instead of just the statistics themselves
@@ -203,6 +340,7 @@ Please also notify me when you are planning on reformatting by starting a new di
         </details>
 
     -   **Quick naming lesson:**
+
         -   Every value shall be `lowercase`
         -   Exception is only when multiple words are in play
             -   ✅ Do
@@ -221,6 +359,7 @@ Please also notify me when you are planning on reformatting by starting a new di
                 -   ws
                 -   fks
         -   Keep names simple and don't change simple names
+
             -   ✅ Do
                 -   finalKills
                 -   winstreak
@@ -230,7 +369,11 @@ Please also notify me when you are planning on reformatting by starting a new di
                 -   epicWinstreak
                 -   poggerKills
 
-</br>
+        -   If you want to really make it perfect:
+            -   Put objects and arrays on the bottom
+            -   Sort them on alphabetical order
+
+    </br>
 
 ## 📨 Submitting data
 
