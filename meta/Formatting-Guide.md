@@ -16,7 +16,7 @@ Even the small gamemodes count :)
     <summary>Sub-modes</summary>
 
     -   Solo
-        -               Normal
+        -                 Normal
         -   Insane
     -   Doubles
         -   Normal
@@ -24,7 +24,7 @@ Even the small gamemodes count :)
     -   Ranked
     -   Mega
     -   Laboratory
-        -               This one has more sub-modes but I dont know all of them
+        -                 This one has more sub-modes but I dont know all of them
         -   Hunters vs Beast
         -   TnT Madness
         -   Slime knockout
@@ -85,7 +85,7 @@ Even the small gamemodes count :)
     <summary>Sub-modes</summary>
 
     -   Speed UHC
-        -               Solo Normal
+        -                 Solo Normal
         -   Teams Normal
     -   Solo
     -   Teams of 3
@@ -381,4 +381,5 @@ You can submit data by creating a [gist](https://gist.github.com/) and copy past
 After creating and saving your gist, create a new issue with in the title `#Formatting` and include a link to your gist in the body. By doing so I can easily find it in between the loads of bugs that need fixing 😓
 
 Thanks in advance, \
-@MauritsWilke
+
+-   [@MauritsWilke](https://www.github.com/MauritsWilke)

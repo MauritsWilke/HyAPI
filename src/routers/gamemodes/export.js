@@ -1,5 +1,6 @@
 module.exports = {
 	bedwars: require(`./bedwars`),
 	duels: require(`./duels`),
-	buildbattle: require(`./buildbattle`)
+	buildbattle: require(`./buildbattle`),
+	murdermystery: require(`./murderMystery`)
 }
