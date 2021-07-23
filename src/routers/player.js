@@ -127,13 +127,16 @@ router.get('/', async function (req, res) {
 				quests: quests,
 
 				// Rank
-				rank: {
+				rank: !config.devUUIDs.includes(player.uuid) ? {
 					type: playerRank,
 					plus: player.rankPlusColor ? {
 						colour: player.rankPlusColor,
 						hex: colours[player.rankPlusColor.toLowerCase()],
 					} : null,
 					rankColour: playerRank == "PIG+++" ? colours.light_purple : hy.rankColours[player?.monthlyRankColor || playerRank]
+				} : {
+					type: "HyAPI Dev",
+					rankColour: colours.blue
 				},
 
 				// Guild
@@ -224,7 +227,6 @@ router.get('/', async function (req, res) {
 					highScore: player.rewardHighScore
 				} : null,
 
-
 				// Ranks Gifted
 				gifted: player.giftingMeta ? {
 					giftsGiven: player.giftingMeta.bundlesGiven ?? null,
@@ -238,11 +240,11 @@ router.get('/', async function (req, res) {
 			formattedPlayer = utils.removeEmpty(reformattedData)
 
 			// _ Update Database
-			if (cacheUser == null) cache.insertOne(cleanedFormatted, (err, res) => {
+			if (cacheUser == null) cache.insertOne(formattedPlayer, (err, res) => {
 				if (err) throw new Error(`Error inserting to database: ${err}`)
 			})
 			else {
-				cache.updateOne({ _id: cacheUser._id }, { $set: cleanedFormatted }, (err, res) => {
+				cache.updateOne({ _id: cacheUser._id }, { $set: formattedPlayer }, (err, res) => {
 					if (err) throw new Error(`Error inserting to database: ${err}`)
 				})
 			}

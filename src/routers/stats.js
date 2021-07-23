@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const gamemodes = require(`./gamemodes/export`)
+const gamemodes = require(`./reformatting/export`)
 const mc = require(`../utils/mojang`)
 const fetch = require(`node-fetch`)
 const config = require(`../config.json`)

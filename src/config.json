@@ -1,4 +1,5 @@
 {
-  "expirationTime": 600000,
-  "BASE_URL": "https://api.hypixel.net"
+    "expirationTime": 600000,
+    "BASE_URL": "https://api.hypixel.net",
+    "devUUIDs": ["11456473de284d36aa7b4150fe7859ab"]
 }

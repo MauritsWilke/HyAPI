@@ -16,7 +16,7 @@ Even the small gamemodes count :)
     <summary>Sub-modes</summary>
 
     -   Solo
-        -                     Normal
+        -                             Normal
         -   Insane
     -   Doubles
         -   Normal
@@ -24,7 +24,7 @@ Even the small gamemodes count :)
     -   Ranked
     -   Mega
     -   Laboratory
-        -                     This one has more sub-modes but I dont know all of them
+        -                             This one has more sub-modes but I dont know all of them
         -   Hunters vs Beast
         -   TnT Madness
         -   Slime knockout
@@ -85,7 +85,7 @@ Even the small gamemodes count :)
     <summary>Sub-modes</summary>
 
     -   Speed UHC
-        -                     Solo Normal
+        -                             Solo Normal
         -   Teams Normal
     -   Solo
     -   Teams of 3
@@ -103,6 +103,7 @@ Even the small gamemodes count :)
     </details>
 
 -   Housing?
+
 -   Blitz SG
     <details>
     <summary>Sub-modes</summary>
@@ -148,7 +149,7 @@ Even the small gamemodes count :)
 
 ### 🟡 In progress
 
--       The Pit
+-   The Pit
 
 ### 🟢 Done!
 
