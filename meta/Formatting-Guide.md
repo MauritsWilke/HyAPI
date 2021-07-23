@@ -371,7 +371,7 @@ Please also notify me when you are planning on reformatting by starting a new di
 
         -   If you want to really make it perfect:
             -   Put objects and arrays on the bottom
-            -   Sort them on alphabetical order
+            -   Sort them in alphabetical order
 
     </br>
 
@@ -380,6 +380,6 @@ Please also notify me when you are planning on reformatting by starting a new di
 You can submit data by creating a [gist](https://gist.github.com/) and copy pasting the reformatted data in there!
 After creating and saving your gist, create a new issue with in the title `#Formatting` and include a link to your gist in the body. By doing so I can easily find it in between the loads of bugs that need fixing 😓
 
-Thanks in advance, \
+Thanks in advance,
 
 -   [@MauritsWilke](https://www.github.com/MauritsWilke)
