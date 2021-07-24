@@ -35,7 +35,7 @@ router.get('/', async function (req, res) {
 
 		const options = typeof (req.query?.options) == "object" ? req.query.options : req.query?.options?.toLowerCase().split(/ +/) ?? []
 
-		const cacheUser = null //await cache.findOne({ uuid: userQuery })
+		const cacheUser = await cache.findOne({ uuid: userQuery })
 		const cacheHasFriends = cacheUser?.friends ? true : false;
 		const cacheHasGuild = cacheUser?.guild ? true : false;
 
@@ -52,7 +52,6 @@ router.get('/', async function (req, res) {
 			// _ Guild Data
 			const { guild, member, rank, guildLevel } = await getGuildData()
 			async function getGuildData() {
-				// return early instead of nesting
 				if (!options.includes("guild")) {
 					return {
 						guild: null,
@@ -73,8 +72,8 @@ router.get('/', async function (req, res) {
 				};
 
 				const guild = guildJson.guild
-				const member = guild.members.find(p => p.uuid == player.uuid)
-				const rank = guild.ranks.find(rank => rank.name == member.rank)
+				const member = guild?.members?.find(p => p.uuid == player.uuid) ?? ""
+				const rank = guild?.ranks?.find(rank => rank.name == member.rank) ?? ""
 
 				return {
 					guild,
@@ -133,7 +132,7 @@ router.get('/', async function (req, res) {
 						colour: player.rankPlusColor,
 						hex: colours[player.rankPlusColor.toLowerCase()],
 					} : null,
-					rankColour: playerRank == "PIG+++" ? colours.light_purple : hy.rankColours[player?.monthlyRankColor || playerRank]
+					rankColour: playerRank == "PIG+++" ? colours.light_purple : hy.rankColours[playerRank == "YOUTUBER" ? playerRank : player?.monthlyRankColor || playerRank]
 				} : {
 					type: "HyAPI Dev",
 					rankColour: colours.blue
@@ -151,11 +150,11 @@ router.get('/', async function (req, res) {
 						hex: colours[guild.tagColor.toLowerCase()]
 					} : null,
 					member: {
-						rank: member.rank,
+						rank: member?.rank,
 						tag: rank?.tag ?? "GM",
-						quests: member.questParticipation,
-						joinedAt: member.joined,
-						expHistory: member.expHistory,
+						quests: member?.questParticipation,
+						joinedAt: member?.joined,
+						expHistory: member?.expHistory,
 					},
 				} : null,
 
