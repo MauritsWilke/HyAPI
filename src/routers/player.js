@@ -254,9 +254,9 @@ router.get('/', async function (req, res) {
 			formattedPlayer = cacheUser
 		}
 
-		delete formattedPlayer.expiresAt
+		const { expiresAt, _id, ...rest } = formattedPlayer
 		res.status(200).send({
-			...formattedPlayer
+			...rest
 		})
 	} catch (err) {
 		res.status(404).json({
