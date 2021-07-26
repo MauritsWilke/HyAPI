@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
 		if (key.queriesLastMin >= key.limit) throw new Error(`Reached query limit per minute [${key.limit}] 429`)
 
 		keyDB.updateOne({ key: key.key }, { $set: { queriesLastMin: +key.queriesLastMin + 1 } })
-
+		res.setHeader('X-Powered-By', 'Love')
 		next()
 	} catch (e) {
 		res.status(e.message.slice(e.message.length - 3, e.message.length)).json({

@@ -147,7 +147,7 @@ router.get('/', async function (req, res) {
 					tag: guild?.tag ? {
 						text: guild.tag,
 						colour: guild.tagColor,
-						hex: colours[guild.tagColor.toLowerCase()]
+						hex: colours[guild?.tagColor?.toLowerCase()] ?? colours.gray
 					} : null,
 					member: {
 						rank: member?.rank,

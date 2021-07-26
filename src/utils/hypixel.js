@@ -92,6 +92,7 @@ const rankColours = {
 	"VIP": colours.green,
 	"VIP+": colours.green,
 	"MVP": colours.aqua,
+	"MVP+": colours.aqua,
 	"GOLD": colours.gold,
 	"AQUA": colours.aqua,
 	"YOUTUBER": colours.red,
