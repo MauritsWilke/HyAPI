@@ -167,11 +167,11 @@ router.get('/', async function (req, res) {
 					hat: player.currentHat ?? null,
 
 					// PET
-					pet: player.currentPet ? {
-						name: player.petStats[player.currentPet]?.name ? player.petStats[player.currentPet]?.name.replace(/§./gi, "") : null,
-						hunger: player.petStats[player.currentPet]?.HUNGER ?? null,
-						exercise: player.petStats[player.currentPet]?.EXERCISE ?? null,
-						type: player.currentPet ?? null
+					pet: player?.currentPet ? {
+						name: player?.petStats?.[player?.currentPet]?.name ? player?.petStats[player?.currentPet]?.name?.replace(/§./gi, "") : null,
+						hunger: player?.petStats?.[player?.currentPet]?.HUNGER ?? null,
+						exercise: player?.petStats?.[player?.currentPet]?.EXERCISE ?? null,
+						type: player?.currentPet ?? null
 					} : null,
 
 					totem: player.achievementTotem ? {
